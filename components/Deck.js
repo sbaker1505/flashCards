@@ -15,9 +15,6 @@ class Deck extends Component {
     }
   }
 
-  startQuiz = () => {
-
-  }
   render() {
     const { deck, navigation } = this.props
 
@@ -40,7 +37,7 @@ class Deck extends Component {
             style={[styles.button, {backgroundColor: green}]}
             onPress={() => navigation.navigate(
               'Quiz',
-              {title: deck.title}
+              {questions: deck.questions}
             )}>
             Start Quiz
           </TextButton>
