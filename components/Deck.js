@@ -16,10 +16,10 @@ class Deck extends Component {
   }
 
   startQuiz = () => {
-    
+
   }
   render() {
-    const { deck } = this.props
+    const { deck, navigation } = this.props
 
     return (
       <View style={styles.container}>
@@ -30,12 +30,18 @@ class Deck extends Component {
         <View style={styles.btnContainer}>
           <TextButton
             style={[styles.button, {backgroundColor: 'rgba(0, 0, 0, 0.4)'}]}
-            onPress={() => console.log('Pressed')}>
+            onPress={() => navigation.navigate(
+              'AddCard',
+              {deck: deck.title}
+            )}>
             Add Card
           </TextButton>
           <TextButton
             style={[styles.button, {backgroundColor: green}]}
-            onPress={() => console.log('Pressed')}>
+            onPress={() => navigation.navigate(
+              'Quiz',
+              {title: deck.title}
+            )}>
             Start Quiz
           </TextButton>
         </View>

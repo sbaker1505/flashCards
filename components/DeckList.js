@@ -24,7 +24,7 @@ class DeckList extends Component {
    }
 
   render() {
-    const { decks } = this.props
+    const { decks, navigation } = this.props
 
     if (this.state.ready === false) {
       return <AppLoading />
@@ -35,7 +35,7 @@ class DeckList extends Component {
         {Object.keys(decks).map(key =>
           <TouchableOpacity
             key={key}
-            onPress={() => this.props.navigation.navigate(
+            onPress={() => navigation.navigate(
               'Deck',
               {deck: decks[key]}
             )}

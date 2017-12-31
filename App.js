@@ -6,7 +6,7 @@ import { createStore } from 'redux'
 import { Provider } from 'react-redux'
 import { Constants } from 'expo'
 
-import reducer from './reducers'
+import reducer    from './reducers'
 
 import DeckList   from './components/DeckList'
 import AddCard    from './components/AddCard'
@@ -14,7 +14,7 @@ import Deck       from './components/Deck'
 import NewDeck    from './components/NewDeck'
 import Quiz       from './components/Quiz'
 
-import { white, blue } from './utils/colors'
+import { white, blue, pink, orange } from './utils/colors'
 
 function AppStatusBar ({ backgroundColor, ...props }) {
   return (
@@ -96,6 +96,24 @@ const DeckNav = StackNavigator({
       headerTintColor: white,
       headerStyle: {
         backgroundColor: blue
+      }
+    }
+  },
+  Quiz: {
+    screen: Quiz,
+    navigationOptions: {
+      headerTintColor: white,
+      headerStyle: {
+        backgroundColor: pink
+      }
+    }
+  },
+  AddCard: {
+    screen: AddCard,
+    navigationOptions: {
+      headerTintColor: white,
+      headerStyle: {
+        backgroundColor: orange
       }
     }
   }
