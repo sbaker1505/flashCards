@@ -1,6 +1,10 @@
 import React, { Component } from 'react'
 import { View, TouchableOpacity, Text, StyleSheet } from 'react-native'
-import { white, blue } from '../utils/colors'
+import { connect } from 'react-redux'
+
+import { white, blue, red, green } from '../utils/colors'
+
+import TextButton       from './TextButton'
 
 class Deck extends Component {
   static navigationOptions = ({ navigation }) => {
@@ -10,13 +14,68 @@ class Deck extends Component {
       title: deck.title
     }
   }
+
+  startQuiz = () => {
+    
+  }
   render() {
+    const { deck } = this.props
+
     return (
-      <View>
-        <Text>Deck</Text>
+      <View style={styles.container}>
+        <View style={styles.textContainer}>
+          <Text style={{fontSize: 24, color: blue}}>{deck.title}</Text>
+          <Text style={{fontSize: 18}}>{deck.questions.length} cards</Text>
+        </View>
+        <View style={styles.btnContainer}>
+          <TextButton
+            style={[styles.button, {backgroundColor: 'rgba(0, 0, 0, 0.4)'}]}
+            onPress={() => console.log('Pressed')}>
+            Add Card
+          </TextButton>
+          <TextButton
+            style={[styles.button, {backgroundColor: green}]}
+            onPress={() => console.log('Pressed')}>
+            Start Quiz
+          </TextButton>
+        </View>
       </View>
     )
   }
 }
 
-export default Deck
+function mapStateToProps(state, { navigation }) {
+  const { deck } = navigation.state.params
+
+  return {
+    deck
+  }
+}
+
+export default connect(mapStateToProps)(Deck)
+
+const styles = StyleSheet.create({
+  container: {
+    flex: 1,
+    margin: 10,
+    paddingTop: 50,
+    paddingBottom: 50,
+    justifyContent: 'space-between',
+    alignItems: 'center',
+    borderWidth: 2,
+    borderColor: blue,
+    borderRadius: 30,
+    backgroundColor: white
+  },
+  textContainer: {
+    justifyContent: 'center',
+    alignItems: 'center'
+  },
+  btnContainer: {
+    width: '100%',
+    alignItems: 'center'
+  },
+  button: {
+    marginTop: 10
+  }
+})

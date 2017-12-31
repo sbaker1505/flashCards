@@ -1,6 +1,7 @@
 import React, { Component } from 'react'
 import { View, TouchableOpacity, Text, StyleSheet } from 'react-native'
 import { connect } from 'react-redux'
+import { AppLoading } from 'expo'
 
 import { white, blue } from '../utils/colors'
 import { fetchDecks } from '../utils/api'
@@ -9,15 +10,25 @@ import { getDecks } from '../actions'
 
 
 class DeckList extends Component {
-  // componentDidMount() {
-  //   const { dispatch } =  this.props
-  //
-  //   fetchDecks()
-  //     .then((decks) => dispatch(getDecks(decks)))
-  // }
+  state = {
+     ready: false
+   }
+
+   componentDidMount() {
+     const { dispatch } = this.props
+
+     fetchDecks()
+       .then((decks) => dispatch(getDecks(decks)))
+       .then(() => this.setState({ ready: true }))
+       .catch((error) => console.warn('Fetching decks error: ' + error))
+   }
 
   render() {
     const { decks } = this.props
+
+    if (this.state.ready === false) {
+      return <AppLoading />
+    }
 
     return (
       <View style={styles.container}>

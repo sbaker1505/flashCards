@@ -12,7 +12,7 @@ import DeckList   from './components/DeckList'
 import AddCard    from './components/AddCard'
 import Deck       from './components/Deck'
 import NewDeck    from './components/NewDeck'
-import Quiz       from './components/DeckList'
+import Quiz       from './components/Quiz'
 
 import { white, blue } from './utils/colors'
 
