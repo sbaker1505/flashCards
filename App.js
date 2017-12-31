@@ -2,12 +2,16 @@ import React from 'react';
 import { StyleSheet, Text, View } from 'react-native';
 import { TabNavigator, StackNavigator } from 'react-navigation'
 import { MaterialCommunityIcons, Ionicons } from '@expo/vector-icons'
+import { createStore } from 'redux'
+import { Provider } from 'react-redux'
 
-import DeckList from './components/DeckList'
-import AddCard from './components/AddCard'
-import Deck from './components/Deck'
-import NewDeck from './components/NewDeck'
-import Quiz from './components/DeckList'
+import reducer from './reducers'
+
+import DeckList   from './components/DeckList'
+import AddCard    from './components/AddCard'
+import Deck       from './components/Deck'
+import NewDeck    from './components/NewDeck'
+import Quiz       from './components/DeckList'
 
 import { white, blue } from './utils/colors'
 
@@ -15,11 +19,13 @@ import { white, blue } from './utils/colors'
 export default class App extends React.Component {
   render() {
     return (
-      <View style={{flex: 1}}>
-        <View style={{height: 30}}/>
-        <Tabs />
-      </View>
-    );
+      <Provider store={createStore(reducer)}>
+        <View style={{flex: 1}}>
+          <View style={{height: 30}}/>
+          <Tabs />
+        </View>
+      </Provider>
+    )
   }
 }
 
