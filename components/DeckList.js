@@ -17,10 +17,16 @@ class DeckList extends Component {
   // }
 
   render() {
+    const { decks } = this.props
+
     return (
-      <View>
-        <Text>Deck List</Text>
-        <Text>{JSON.stringify(this.props.decks)}</Text>
+      <View style={styles.container}>
+        {Object.keys(decks).map(key =>
+          <View key={key} style={styles.card}>
+            <Text style={{fontSize: 24, color: blue}}>{decks[key].title}</Text>
+            <Text style={{fontSize: 16}}>{decks[key].questions.length} cards</Text>
+          </View>
+        )}
       </View>
     )
   }
@@ -33,3 +39,20 @@ function mapStateToProps(decks) {
 }
 
 export default connect(mapStateToProps)(DeckList)
+
+
+const styles = StyleSheet.create({
+  container: {
+    flex: 1
+  },
+  card: {
+    height: 100,
+    backgroundColor: 'rgba(0, 0, 0, 0.05)',
+    borderRadius: 5,
+    margin: 5,
+    marginLeft: 10,
+    marginRight: 10,
+    justifyContent: 'center',
+    alignItems: 'center'
+  }
+})
