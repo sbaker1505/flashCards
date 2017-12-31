@@ -19,7 +19,7 @@ class Quiz extends Component {
     const { questions } = navigation.state.params
 
     return {
-      title: `Question ${counter} of ${questions.length}`
+      title: `Question 1 of ${questions.length}`
     }
   }
 
@@ -27,7 +27,10 @@ class Quiz extends Component {
     const { cardIndex } = this.state
     const { questions } = this.props
     if (cardIndex < questions.length - 1){
-      this.setState({cardIndex: cardIndex + 1})
+      this.setState({
+        cardIndex: cardIndex + 1,
+        showAnswer: false
+      })
     } else {
       this.setState({gameOver: true})
     }
@@ -53,15 +56,13 @@ class Quiz extends Component {
     return (
       <View style={styles.container}>
         <Text style={styles.title}>{questions[cardIndex].question}</Text>
-        <Text style={{fontSize: 24, color: pink}}>Index: {cardIndex}</Text>
-        <Text style={{fontSize: 24, color: pink}}>Score: {score}</Text>
         {this.state.showAnswer
         ? <View style={styles.center}>
             <TouchableOpacity onPress={() => this.setState({showAnswer: !this.state.showAnswer})}>
               <Text style={{fontSize: 16, color: red}}>Hide Answer</Text>
             </TouchableOpacity>
             <View style={styles.answer}>
-              <Text style={{fontSize: 16}}>{questions[0].answer}</Text>
+              <Text style={{fontSize: 16}}>{questions[cardIndex].answer}</Text>
             </View>
           </View>
         : <TouchableOpacity onPress={() => this.setState({showAnswer: !this.state.showAnswer})}>
