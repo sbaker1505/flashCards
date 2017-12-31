@@ -22,10 +22,16 @@ class DeckList extends Component {
     return (
       <View style={styles.container}>
         {Object.keys(decks).map(key =>
-          <View key={key} style={styles.card}>
-            <Text style={{fontSize: 24, color: blue}}>{decks[key].title}</Text>
-            <Text style={{fontSize: 16}}>{decks[key].questions.length} cards</Text>
-          </View>
+          <TouchableOpacity
+            key={key}
+            onPress={() => this.props.navigation.navigate(
+              'Deck',
+              {deck: decks[key]}
+            )}
+            style={styles.card}>
+              <Text style={{fontSize: 24, color: blue}}>{decks[key].title}</Text>
+              <Text style={{fontSize: 16}}>{decks[key].questions.length} cards</Text>
+          </TouchableOpacity>
         )}
       </View>
     )
@@ -47,7 +53,7 @@ const styles = StyleSheet.create({
   },
   card: {
     height: 100,
-    backgroundColor: 'rgba(0, 0, 0, 0.05)',
+    backgroundColor: white,
     borderRadius: 5,
     margin: 5,
     marginLeft: 10,
