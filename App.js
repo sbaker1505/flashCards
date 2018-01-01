@@ -72,7 +72,7 @@ const Tabs = TabNavigator({
   tabBarOptions: {
     activeTintColor: blue,
     style: {
-      height: 56,
+      height: 60,
       backgroundColor: white,
       shadowColor: 'rgba(0, 0, 0, 0.24)',
       shadowOffset: {
@@ -117,4 +117,7 @@ const DeckNav = StackNavigator({
       }
     }
   }
+},{
+  headerMode: 'float',
+  mode: 'modal'
 })

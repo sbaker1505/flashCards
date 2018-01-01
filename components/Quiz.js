@@ -19,7 +19,10 @@ class Quiz extends Component {
     const { questions } = navigation.state.params
 
     return {
-      title: `Question 1 of ${questions.length}`
+      title: typeof (navigation.state.params) === 'undefined'
+      || typeof (navigation.state.params.title) === 'undefined'
+        ? `Question 1 of ${questions.length}`
+        : navigation.state.params.title,
     }
   }
 
@@ -27,12 +30,14 @@ class Quiz extends Component {
     const { cardIndex } = this.state
     const { questions } = this.props
     if (cardIndex < questions.length - 1){
+      this.props.navigation.setParams({ title: `Question ${cardIndex + 2} of ${questions.length}` })
       this.setState({
         cardIndex: cardIndex + 1,
         showAnswer: false
       })
     } else {
       this.setState({gameOver: true})
+      this.props.navigation.setParams({ title: 'Quiz Complete' })
     }
   }
 
