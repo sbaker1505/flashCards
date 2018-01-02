@@ -7,6 +7,15 @@ export function fetchDecks() {
     .then(checkInit)
 }
 
+export function submitNewDeck (title) {
+  return AsyncStorage.mergeItem(DECK_STORAGE_KEY, JSON.stringify({
+    [title]: {
+      title,
+      questions: []
+    }
+  }))
+}
+
 function checkInit(results){
   return results === null ? initStartupDecks() : JSON.parse(results)
 }

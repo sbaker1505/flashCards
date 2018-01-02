@@ -17,30 +17,38 @@ class Deck extends Component {
 
   render() {
     const { deck, navigation } = this.props
+    const cards = deck.questions
 
     return (
       <View style={styles.container}>
         <View style={styles.textContainer}>
           <Text style={{fontSize: 24, color: blue}}>{deck.title}</Text>
-          <Text style={{fontSize: 18}}>{deck.questions.length} cards</Text>
+          {cards.length > 0
+            ? <Text style={{fontSize: 18}}>{deck.questions.length} cards</Text>
+            : <Text style={{fontSize: 18}}>You have no cards in this deck.</Text>}
         </View>
         <View style={styles.btnContainer}>
           <TextButton
-            style={[styles.button, {backgroundColor: 'rgba(0, 0, 0, 0.4)'}]}
+            style={cards.length > 0
+              ? [styles.button, {backgroundColor: 'rgba(0, 0, 0, 0.4)'}]
+              : [styles.button, {backgroundColor: blue, height: 100, justifyContent: 'center'}]}
             onPress={() => navigation.navigate(
               'AddCard',
               {deck: deck.title}
             )}>
             Add Card
           </TextButton>
-          <TextButton
-            style={[styles.button, {backgroundColor: green}]}
-            onPress={() => navigation.navigate(
-              'Quiz',
-              {questions: deck.questions}
-            )}>
-            Start Quiz
-          </TextButton>
+          {cards.length > 0
+            ? <TextButton
+                style={[styles.button, {backgroundColor: green}]}
+                onPress={() => navigation.navigate(
+                  'Quiz',
+                  {questions: deck.questions}
+                )}>
+                Start Quiz
+              </TextButton>
+            : null}
+
         </View>
       </View>
     )

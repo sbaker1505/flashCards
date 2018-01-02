@@ -1,5 +1,9 @@
 import React, { Component } from 'react'
-import { View, TouchableOpacity, Text, StyleSheet } from 'react-native'
+import {  View,
+          TouchableOpacity,
+          Text,
+          StyleSheet,
+          ScrollView } from 'react-native'
 import { connect } from 'react-redux'
 import { AppLoading } from 'expo'
 
@@ -31,20 +35,25 @@ class DeckList extends Component {
     }
 
     return (
-      <View style={styles.container}>
-        {Object.keys(decks).map(key =>
-          <TouchableOpacity
-            key={key}
-            onPress={() => navigation.navigate(
-              'Deck',
-              {deck: decks[key]}
-            )}
-            style={styles.card}>
-              <Text style={{fontSize: 24, color: blue}}>{decks[key].title}</Text>
-              <Text style={{fontSize: 16}}>{decks[key].questions.length} cards</Text>
-          </TouchableOpacity>
-        )}
-      </View>
+      <ScrollView>
+        <View style={styles.container}>
+          {Object.keys(decks).map(key =>
+            <TouchableOpacity
+              key={key}
+              onPress={() => navigation.navigate(
+                'Deck',
+                {deck: decks[key]}
+              )}
+              style={styles.card}>
+                <Text style={{fontSize: 24, color: blue}}>{decks[key].title}</Text>
+                {decks[key].questions
+                  ? <Text style={{fontSize: 16}}>{decks[key].questions.length} cards</Text>
+                  : <Text style={{fontSize: 16}}>0 cards</Text>}
+
+            </TouchableOpacity>
+          )}
+        </View>
+      </ScrollView>
     )
   }
 }

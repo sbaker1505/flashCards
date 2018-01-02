@@ -1,7 +1,11 @@
 import React, { Component } from 'react'
 import { View, TouchableOpacity, Text, StyleSheet, TextInput, KeyboardAvoidingView } from 'react-native'
+import { NavigationActions } from 'react-navigation'
+import { connect } from 'react-redux'
 
 import { white, blue, gray, red } from '../utils/colors'
+import { addDeck } from '../actions'
+import { submitNewDeck } from '../utils/api'
 
 import TextButton       from './TextButton'
 
@@ -9,6 +13,36 @@ class NewDeck extends Component {
   state = {
     title: null
   }
+
+  submit = () => {
+    const { title } = this.state
+
+    // Add deck to redux
+    this.props.dispatch(addDeck(title))
+
+    // Reset state
+    this.setState(() => ({
+      title: null
+    }))
+
+    // Re-Route to home page
+    this.toHome()
+
+    // Send deck title to AsyncStorage
+    submitNewDeck(title)
+
+
+    // clearLocalNotification()
+    //   .then(setLocalNotification)
+  }
+
+  toHome = () => {
+    this.props.navigation.dispatch(NavigationActions.back({
+      key: 'NewDeck'
+    }))
+  }
+
+
   render() {
     return (
       <KeyboardAvoidingView behavior='padding' style={styles.keyboardContainer}>
@@ -17,7 +51,7 @@ class NewDeck extends Component {
           <TextInput
             placeholder='Deck Title'
             autoFocus={true}
-            maxLength={30}
+            maxLength={20}
             placeholderTextColor={gray}
             value={this.state.title}
             style={styles.input}
@@ -25,7 +59,7 @@ class NewDeck extends Component {
           />
           <TextButton
             style={styles.button}
-            onPress={() => console.log('Pressed')}>
+            onPress={this.submit}>
             Submit
           </TextButton>
         </View>
@@ -34,7 +68,7 @@ class NewDeck extends Component {
   }
 }
 
-export default NewDeck
+export default connect()(NewDeck)
 
 const styles = StyleSheet.create({
   keyboardContainer: {

@@ -1,23 +1,27 @@
 import { GET_DECKS, ADD_DECK, ADD_CARD } from '../actions'
 
 function decks (state = {}, action) {
+   const { decks, deck, card } = action
   switch(action.type) {
     case GET_DECKS :
       return {
         ...state,
-        ...action.decks
+        ...decks
       }
     case ADD_DECK :
       return {
         ...state,
-        ...action.deck
+        [deck]: {
+          title: deck,
+          questions: []
+        }
       }
     case ADD_CARD :
       return {
         ...state,
-        [action.deck]: {
-          ...state[action.deck],
-          ...action.card
+        [deck]: {
+          ...state[deck],
+          ...card
         }
       }
     default :

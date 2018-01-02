@@ -16,6 +16,11 @@ import Quiz       from './components/Quiz'
 
 import { white, blue, pink, orange } from './utils/colors'
 
+
+// Clears data if fatal error
+// import { AsyncStorage } from 'react-native'
+// AsyncStorage.clear()
+
 function AppStatusBar ({ backgroundColor, ...props }) {
   return (
     <View style={{backgroundColor, height: Constants.statusBarHeight}}>
