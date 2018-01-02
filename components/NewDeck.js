@@ -20,26 +20,25 @@ class NewDeck extends Component {
     // Add deck to redux
     this.props.dispatch(addDeck(title))
 
+    // Send deck title to AsyncStorage
+    submitNewDeck(title)
+
+    // Re-Route to home page
+    this.toHome(title)
+
     // Reset state
     this.setState(() => ({
       title: null
     }))
-
-    // Re-Route to home page
-    this.toHome()
-
-    // Send deck title to AsyncStorage
-    submitNewDeck(title)
-
-
-    // clearLocalNotification()
-    //   .then(setLocalNotification)
   }
 
-  toHome = () => {
-    this.props.navigation.dispatch(NavigationActions.back({
-      key: 'NewDeck'
-    }))
+  toHome = (title) => {
+    this.props.navigation.navigate(
+      'Deck',
+      {deck: {
+        title,
+        questions: []
+      }})
   }
 
 

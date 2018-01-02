@@ -1,5 +1,5 @@
 import React from 'react';
-import { StyleSheet, Text, View, StatusBar } from 'react-native';
+import { StyleSheet, Text, View, StatusBar, Button } from 'react-native';
 import { TabNavigator, StackNavigator } from 'react-navigation'
 import { MaterialCommunityIcons, Ionicons } from '@expo/vector-icons'
 import { createStore } from 'redux'
@@ -18,8 +18,8 @@ import { white, blue, pink, orange } from './utils/colors'
 
 
 // Clears data if fatal error
-import { AsyncStorage } from 'react-native'
-AsyncStorage.clear()
+// import { AsyncStorage } from 'react-native'
+// AsyncStorage.clear()
 
 function AppStatusBar ({ backgroundColor, ...props }) {
   return (

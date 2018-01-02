@@ -34,10 +34,6 @@ class AddCards extends Component {
 
     // Send deck title to AsyncStorage
     submitNewCard(deck, {question, answer})
-
-
-    // clearLocalNotification()
-    //   .then(setLocalNotification)
   }
 
   toHome = () => {

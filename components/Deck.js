@@ -1,6 +1,7 @@
 import React, { Component } from 'react'
-import { View, TouchableOpacity, Text, StyleSheet } from 'react-native'
+import { View, TouchableOpacity, Text, StyleSheet, Button } from 'react-native'
 import { connect } from 'react-redux'
+import { Ionicons } from '@expo/vector-icons'
 
 import { white, blue, red, green } from '../utils/colors'
 
@@ -11,7 +12,10 @@ class Deck extends Component {
     const { deck } = navigation.state.params
 
     return {
-      title: deck.title
+      title: deck.title,
+      headerLeft: <TouchableOpacity onPress={() => navigation.navigate('DeckList')}>
+        <Ionicons name='ios-arrow-back' size={35} color={white} style={{margin: 10}}/>
+      </TouchableOpacity>
     }
   }
 
