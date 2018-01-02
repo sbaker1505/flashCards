@@ -14,7 +14,7 @@ import Deck       from './components/Deck'
 import NewDeck    from './components/NewDeck'
 import Quiz       from './components/Quiz'
 
-import { white, blue, pink, orange } from './utils/colors'
+import { white, blue, pink, orange, purple } from './utils/colors'
 
 
 // Clears data if fatal error
@@ -79,12 +79,12 @@ const Tabs = TabNavigator({
     style: {
       height: 60,
       backgroundColor: white,
-      shadowColor: 'rgba(0, 0, 0, 0.24)',
+      shadowColor: purple,
       shadowOffset: {
         width: 0,
         height: 3
       },
-      shadowRadius: 6,
+      shadowRadius: 8,
       shadowOpacity: 1
     }
   }
@@ -109,7 +109,7 @@ const DeckNav = StackNavigator({
     navigationOptions: {
       headerTintColor: white,
       headerStyle: {
-        backgroundColor: pink
+        backgroundColor: blue
       }
     }
   },
@@ -118,7 +118,7 @@ const DeckNav = StackNavigator({
     navigationOptions: {
       headerTintColor: white,
       headerStyle: {
-        backgroundColor: orange
+        backgroundColor: blue
       }
     }
   }

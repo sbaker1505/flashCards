@@ -48,7 +48,7 @@ class Deck extends Component {
                 style={[styles.button, {backgroundColor: green}]}
                 onPress={() => navigation.navigate(
                   'Quiz',
-                  {questions: deck.questions}
+                  {questions: deck.questions.sort(() => .5 - Math.random())}
                 )}>
                 Start Quiz
               </TextButton>

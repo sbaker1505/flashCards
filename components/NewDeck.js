@@ -59,7 +59,7 @@ class NewDeck extends Component {
           <TextButton
             style={styles.button}
             onPress={this.submit}>
-            Submit
+            ADD DECK
           </TextButton>
         </View>
       </KeyboardAvoidingView>

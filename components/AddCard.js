@@ -67,7 +67,7 @@ class AddCards extends Component {
           <TextButton
             style={styles.button}
             onPress={this.submit}>
-            Submit
+            ADD CARD
           </TextButton>
         </View>
       </KeyboardAvoidingView>

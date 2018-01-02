@@ -1,5 +1,5 @@
 import React, { Component } from 'react'
-import { View, TouchableOpacity, Text, StyleSheet } from 'react-native'
+import { View, TouchableOpacity, Text, StyleSheet, Animated } from 'react-native'
 import { connect } from 'react-redux'
 
 import { clearLocalNotification, setLocalNotification } from '../utils/helpers'
@@ -14,7 +14,8 @@ class Quiz extends Component {
     cardIndex: 0,
     score: 0,
     showAnswer: false,
-    gameOver: false
+    gameOver: false,
+    bounceValue: new Animated.Value(0)
   }
 
   static navigationOptions = ({ navigation }) => {
@@ -61,12 +62,17 @@ class Quiz extends Component {
 
   render() {
     const { questions, navigation } = this.props
-    const { cardIndex, score, gameOver } = this.state
+    const { cardIndex, score, gameOver, bounceValue } = this.state
 
     if (gameOver) {
+      Animated.sequence([
+        Animated.timing(bounceValue, { duration: 300, toValue: 1.5}),
+        Animated.spring(bounceValue, {toValue: 1, friction: 5})
+      ]).start()
+
       return (
         <View style={styles.container}>
-          <Text style={{fontSize: 24, color: pink}}>Correct: {this.state.score}/{questions.length}</Text>
+          <Animated.Text style={{fontSize: 24, color: pink, transform: [{scale: bounceValue}]}}>Correct: {this.state.score}/{questions.length}</Animated.Text>
           <View style={styles.btnContainer}>
             <TextButton
               style={[styles.button, {backgroundColor: blue}]}
@@ -134,7 +140,7 @@ const styles = StyleSheet.create({
     justifyContent: 'space-between',
     alignItems: 'center',
     borderWidth: 2,
-    borderColor: pink,
+    borderColor: blue,
     borderRadius: 30,
     backgroundColor: white
   },
@@ -144,7 +150,7 @@ const styles = StyleSheet.create({
   },
   title: {
     fontSize: 24,
-    color: pink,
+    color: blue,
     marginLeft: 20,
     marginRight: 20
   },
