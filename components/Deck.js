@@ -21,6 +21,7 @@ class Deck extends Component {
 
     return (
       <View style={styles.container}>
+        <Text>{JSON.stringify(deck)}</Text>
         <View style={styles.textContainer}>
           <Text style={{fontSize: 24, color: blue}}>{deck.title}</Text>
           {cards.length > 0
@@ -34,7 +35,7 @@ class Deck extends Component {
               : [styles.button, {backgroundColor: blue, height: 100, justifyContent: 'center'}]}
             onPress={() => navigation.navigate(
               'AddCard',
-              {deck: deck.title}
+              {deck}
             )}>
             Add Card
           </TextButton>
@@ -55,11 +56,11 @@ class Deck extends Component {
   }
 }
 
-function mapStateToProps(state, { navigation }) {
+function mapStateToProps(decks, { navigation }) {
   const { deck } = navigation.state.params
 
   return {
-    deck
+    deck: decks[deck.title]
   }
 }
 

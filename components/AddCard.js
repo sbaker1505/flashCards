@@ -1,7 +1,11 @@
 import React, { Component } from 'react'
 import { View, TouchableOpacity, Text, StyleSheet, TextInput, KeyboardAvoidingView } from 'react-native'
+import { NavigationActions } from 'react-navigation'
+import { connect } from 'react-redux'
 
 import { white, blue, red, gray } from '../utils/colors'
+import { addCard } from '../actions'
+import { submitNewCard } from '../utils/api'
 
 import TextButton       from './TextButton'
 
@@ -11,12 +15,41 @@ class AddCards extends Component {
     question: null,
     answer: null
   }
+
+  submit = () => {
+    const { question, answer } = this.state
+    const { deck } = this.props.navigation.state.params
+
+    // Add deck to redux
+    this.props.dispatch(addCard(deck, {question, answer}))
+
+    // Reset state
+    this.setState(() => ({
+      question: null,
+      answer: null
+    }))
+
+    // Re-Route to home page
+    this.toHome()
+
+    // Send deck title to AsyncStorage
+    submitNewCard(deck, {question, answer})
+
+
+    // clearLocalNotification()
+    //   .then(setLocalNotification)
+  }
+
+  toHome = () => {
+    this.props.navigation.dispatch(NavigationActions.back())
+  }
+
   render() {
     const { deck } = this.props.navigation.state.params
     return (
       <KeyboardAvoidingView behavior='padding' style={styles.keyboardContainer}>
         <View style={styles.container}>
-          <Text style={styles.text}>Add new card to the {deck} deck</Text>
+          <Text style={styles.text}>Add new card to the {deck.title} deck</Text>
           <View style={styles.btnContainer}>
             <TextInput
               placeholder='Question'
@@ -37,7 +70,7 @@ class AddCards extends Component {
           </View>
           <TextButton
             style={styles.button}
-            onPress={() => console.log('Pressed')}>
+            onPress={this.submit}>
             Submit
           </TextButton>
         </View>
@@ -46,7 +79,7 @@ class AddCards extends Component {
   }
 }
 
-export default AddCards
+export default connect()(AddCards)
 
 const styles = StyleSheet.create({
   keyboardContainer: {

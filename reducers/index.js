@@ -19,9 +19,12 @@ function decks (state = {}, action) {
     case ADD_CARD :
       return {
         ...state,
-        [deck]: {
-          ...state[deck],
-          ...card
+        [deck.title]: {
+          ...deck,
+          questions: [
+            ...deck.questions,
+            {...card}
+          ]
         }
       }
     default :

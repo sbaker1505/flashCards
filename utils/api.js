@@ -16,6 +16,20 @@ export function submitNewDeck (title) {
   }))
 }
 
+export function submitNewCard (deck, card) {
+  return AsyncStorage.mergeItem(DECK_STORAGE_KEY, JSON.stringify({
+    [deck.title]: {
+      ...deck,
+      questions: [
+        ...deck.questions,
+        {...card}
+      ]
+    }
+  }))
+}
+
+
+
 function checkInit(results){
   return results === null ? initStartupDecks() : JSON.parse(results)
 }
