@@ -2,6 +2,8 @@ import React, { Component } from 'react'
 import { View, TouchableOpacity, Text, StyleSheet } from 'react-native'
 import { connect } from 'react-redux'
 
+import { clearLocalNotification, setLocalNotification } from '../utils/helpers'
+
 import { white, blue, green, red, pink, gray } from '../utils/colors'
 
 import TextButton       from './TextButton'
@@ -38,6 +40,7 @@ class Quiz extends Component {
     } else {
       this.setState({gameOver: true})
       this.props.navigation.setParams({ title: 'Quiz Complete' })
+      clearLocalNotification().then(setLocalNotification)
     }
   }
 
