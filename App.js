@@ -1,5 +1,5 @@
 import React from 'react';
-import { StyleSheet, Text, View, StatusBar, Button } from 'react-native';
+import { StyleSheet, View, StatusBar, TouchableOpacity } from 'react-native';
 import { TabNavigator, StackNavigator } from 'react-navigation'
 import { MaterialCommunityIcons, Ionicons } from '@expo/vector-icons'
 import { createStore } from 'redux'

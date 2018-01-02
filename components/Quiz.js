@@ -49,6 +49,16 @@ class Quiz extends Component {
     this.cardCounter()
   }
 
+  reset = () => {
+    this.setState({
+      cardIndex: 0,
+      score: 0,
+      showAnswer: false,
+      gameOver: false
+    })
+    this.props.navigation.setParams({ title: `Question 1 of ${this.props.questions.length}` })
+  }
+
   render() {
     const { questions, navigation } = this.props
     const { cardIndex, score, gameOver } = this.state
@@ -56,7 +66,19 @@ class Quiz extends Component {
     if (gameOver) {
       return (
         <View style={styles.container}>
-          <Text style={{fontSize: 24, color: pink}}>Your score is {this.state.score}</Text>
+          <Text style={{fontSize: 24, color: pink}}>Correct: {this.state.score}/{questions.length}</Text>
+          <View style={styles.btnContainer}>
+            <TextButton
+              style={[styles.button, {backgroundColor: blue}]}
+              onPress={() => this.reset()}>
+              Retake Quiz
+            </TextButton>
+            <TextButton
+              style={[styles.button, {backgroundColor: gray}]}
+              onPress={() => navigation.goBack()}>
+              Back to Deck
+            </TextButton>
+          </View>
         </View>
       )
     }
