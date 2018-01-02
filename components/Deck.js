@@ -21,7 +21,7 @@ class Deck extends Component {
 
     return (
       <View style={styles.container}>
-        <Text>{JSON.stringify(deck)}</Text>
+        {/* <Text>{JSON.stringify(deck)}</Text> */}
         <View style={styles.textContainer}>
           <Text style={{fontSize: 24, color: blue}}>{deck.title}</Text>
           {cards.length > 0

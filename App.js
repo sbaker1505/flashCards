@@ -18,8 +18,8 @@ import { white, blue, pink, orange } from './utils/colors'
 
 
 // Clears data if fatal error
-// import { AsyncStorage } from 'react-native'
-// AsyncStorage.clear()
+import { AsyncStorage } from 'react-native'
+AsyncStorage.clear()
 
 function AppStatusBar ({ backgroundColor, ...props }) {
   return (
